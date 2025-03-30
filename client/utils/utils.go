@@ -45,9 +45,26 @@ func LeerConsola() {
 func GenerarYEnviarPaquete() {
 	paquete := Paquete{}
 	// Leemos y cargamos el paquete
-
-	log.Printf("paqute a enviar: %+v", paquete)
-	// Enviamos el paqute
+	/*OPCION 1(todavia no funciona)
+	var text string //no necesito asignarle un valor por defecto ya que en Go estos siempre son predefinidos, en este caso es ""
+	log.Println("Ingrese los mensajes a enviar, presione ENTER para enviar un nuevo mensaje o escriba terminar para finalizar y enviar el paquete")
+	for text != "terminar" {
+		reader := bufio.NewReader(os.Stdin)
+		text = enviar
+		enviar, _ := reader.ReadString('\n')
+		paquete.Valores = append(paquete.Valores, enviar)
+		log.Printf("es el valor de text es %s", text)
+		log.Printf("paquete a enviar: %+v", paquete)
+	}*/
+	//OPCION 2:
+	reader := bufio.NewReader(os.Stdin)
+	log.Println("Ingrese los mensajes a enviar, presione ENTER para finalizar")
+	enviar, _ := reader.ReadString('\n')
+	paquete.Valores = append(paquete.Valores, enviar)
+	log.Printf("paquete a enviar: %+v", paquete)
+	// Enviamos el paquete
+	EnviarPaquete(globals.ClientConfig.Ip, globals.ClientConfig.Puerto, paquete)
+	log.Printf("paquete enviado!")
 }
 
 func EnviarMensaje(ip string, puerto int, mensajeTxt string) {

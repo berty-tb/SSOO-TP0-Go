@@ -1,11 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"client/globals"
 	"client/utils"
 	"log"
-	"os"
 )
 
 func main() {
@@ -23,19 +21,22 @@ func main() {
 
 	/////////////////////////////////////////////////////////////////////////////////////
 	//acá pongo la parte en la que se lee hasta tocar un enter
-	reader := bufio.NewReader(os.Stdin) //el new reader le asigna a la variable reader el ser un buffer que guarda lo ingresado por el argumento de new reader
-	log.Println("Ingrese el texto a enviar junto a la clave:")
-	text, _ := reader.ReadString('\n') //guarda en reader toda la cadena ingresada hasta encontrar un \n
-	log.Println("El texto ingresado fue: ")
-	log.Print(text)
+	/*
+		reader := bufio.NewReader(os.Stdin) //el new reader le asigna a la variable reader el ser un buffer que guarda lo ingresado por el argumento de new reader
+		log.Println("Ingrese el texto a enviar junto a la clave:")
+		text, _ := reader.ReadString('\n') //guarda en reader toda la cadena ingresada hasta encontrar un \n
+		log.Println("El texto ingresado fue: ")
+		log.Print(text)
+		todo esto ya está incluido en la utils.LeerConsola*/
+	/////////////////////////////////////////////////////////////////////////////////////
 	// ADVERTENCIA: Antes de continuar, tenemos que asegurarnos que el servidor esté corriendo para poder conectarnos a él
 
 	// enviar un mensaje al servidor con el valor de la config
-
+	utils.EnviarMensaje(globals.ClientConfig.Ip, globals.ClientConfig.Puerto, globals.ClientConfig.Mensaje)
 	// leer de la consola el mensaje
 	// utils.LeerConsola()
 
 	// generamos un paquete y lo enviamos al servidor
-	// utils.GenerarYEnviarPaquete()
+	utils.GenerarYEnviarPaquete()
 	log.Println("Finaliza el cliente")
 }
